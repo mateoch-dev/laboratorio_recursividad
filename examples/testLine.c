@@ -1,4 +1,5 @@
 #include "../turtlec.h"
+#include <math.h>
 
 void clock(Turtle *t) {
   for (int i = 0; i < 13; i++) {
@@ -76,6 +77,43 @@ void triangulo(Turtle *t, int n, float tam) {
   triangulo(t, n - 1, tam / 2);
 }
 
+void fractalTree(Turtle *turtle, float length, int depth) {
+  if (depth == 0 || length < 5)
+    return;
+
+  turtleForward(turtle, length);
+
+  if (depth > 5)
+    turtleSetColor(turtle, 255, 200, 100);
+
+  else
+    turtleSetColor(turtle, 100, 000, 231);
+
+  turtleLeft(turtle, 30);
+  fractalTree(turtle, length * 0.7, depth - 1);
+
+  turtleRight(turtle, 60);
+  fractalTree(turtle, length * 0.7, depth - 1);
+
+  turtleLeft(turtle, 30);
+  turtleBackward(turtle, length);
+}
+
+void levy(Turtle *turtle, float length, int depth) {
+  if (depth == 0) {
+    turtleForward(turtle, length);
+    return;
+  }
+
+  turtleLeft(turtle, 45);
+  levy(turtle, length / sqrt(2), depth - 1);
+
+  turtleRight(turtle, 90);
+  levy(turtle, length / sqrt(2), depth - 1);
+
+  turtleLeft(turtle, 45);
+}
+
 int main(void) {
   TurtleApp *app = turtleAppCreate(600, 600, "Test Line");
 
@@ -84,7 +122,8 @@ int main(void) {
 
   Turtle *t = turtleAppGetTurtle(app);
 
-  triangulo(t, 5, 100);
+  /*fractalTree(t, 100, 6);*/
+  levy(t, 50, 6);
 
   turtleSetColor(t, 255, 100, 0);
   turtleSetSpeed(t, 0.0001);
