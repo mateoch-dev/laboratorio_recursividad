@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -I.
-LDLIBS = -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
+CFLAGS = -Wall -Wextra -std=c11 -I. -I/opt/homebrew/include
+LDLIBS = -L/opt/homebrew/lib -lcsfml-graphics -lcsfml-window -lcsfml-system -lm
 
 all: testLine
 

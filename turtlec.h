@@ -1,7 +1,7 @@
 #ifndef TURTLEC_H
 #define TURTLEC_H
 
-#include <SFML/Graphics.h>
+#include <CSFML/Graphics.h>
 #include <stdbool.h>
 #include <stdint.h>
 
