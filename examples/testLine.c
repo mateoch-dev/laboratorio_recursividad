@@ -77,23 +77,23 @@ void triangulo(Turtle *t, int n, float tam) {
   triangulo(t, n - 1, tam / 2);
 }
 
-void fractalTree(Turtle *turtle, float length, int depth) {
+void fractalTree(Turtle *turtle, float length, int depth, int color) {
   if (depth == 0 || length < 5)
     return;
 
   turtleForward(turtle, length);
 
-  if (depth > 5)
-    turtleSetColor(turtle, 255, 200, 100);
-
-  else
-    turtleSetColor(turtle, 100, 000, 231);
-
   turtleLeft(turtle, 30);
-  fractalTree(turtle, length * 0.7, depth - 1);
+  fractalTree(turtle, length * 0.8, depth - 1, ++color);
 
-  turtleRight(turtle, 60);
-  fractalTree(turtle, length * 0.7, depth - 1);
+  turtleRight(turtle, 30);
+  fractalTree(turtle, length * 0.7, depth - 1, ++color);
+
+  turtleRight(turtle, 30);
+  fractalTree(turtle, length * 0.6, depth - 1, ++color);
+
+  if (depth < color)
+    turtleSetColor(turtle, 20 + (color * 10), color * 10, 30 + (color * 10));
 
   turtleLeft(turtle, 30);
   turtleBackward(turtle, length);
@@ -122,11 +122,11 @@ int main(void) {
 
   Turtle *t = turtleAppGetTurtle(app);
 
-  /*fractalTree(t, 100, 6);*/
-  levy(t, 50, 6);
+  fractalTree(t, 80, 5, 1);
+  /*levy(t, 50, 6);*/
 
   turtleSetColor(t, 255, 100, 0);
-  turtleSetSpeed(t, 0.0001);
+  turtleSetSpeed(t, 0.1);
 
   turtleAppRun(app);
   turtleAppDestroy(app);
