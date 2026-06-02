@@ -28,7 +28,7 @@ void fractalTree(Turtle *turtle, float length, int depth) {
   turtleBackward(turtle, length);
 }
 
-void levy(Turtle *turtle, float length, int depth, int color) {
+void levy(Turtle *turtle, float length, int depth) {
   if (depth == 0) {
     turtleForward(turtle, length);
     return;
@@ -37,14 +37,18 @@ void levy(Turtle *turtle, float length, int depth, int color) {
   int r = (depth * 80) % 200 + 55;
   int g = (depth * 120 + 30) % 200 + 55;
   int b = (depth * 160 + 60) % 200 + 55;
-
   turtleSetColor(turtle, r, g, b);
 
   turtleLeft(turtle, 45);
-  levy(turtle, length / sqrt(2), depth - 1, ++color);
+  levy(turtle, length / sqrt(2), depth - 1);
+
+  r = (depth * 70 + 140) % 200 + 55;
+  g = (depth * 50 + 30) % 200 + 55;
+  b = (depth * 100 + 160) % 200 + 55;
+  turtleSetColor(turtle, r, g, b);
 
   turtleRight(turtle, 90);
-  levy(turtle, length / sqrt(2), depth - 1, ++color);
+  levy(turtle, length / sqrt(2), depth - 1);
 
   turtleLeft(turtle, 45);
 }
@@ -58,7 +62,7 @@ int main(void) {
   Turtle *t = turtleAppGetTurtle(app);
 
   /*fractalTree(t, 80, 4);*/
-  levy(t, 150, 8, 1);
+  levy(t, 150, 6);
 
   turtleSetColor(t, 255, 100, 0);
   turtleSetSpeed(t, 0.1);
